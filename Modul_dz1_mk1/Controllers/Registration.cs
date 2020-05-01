@@ -15,9 +15,9 @@ namespace Modul_dz1_mk1.Controllers
         {
             if (!IsEmailValid(registrInfo.Email)) throw new IncorrectRequestException("плохой адрес");
             if (string.IsNullOrEmpty(registrInfo.Name))  throw new Exception("нет имени");
-            if (string.IsNullOrEmpty(registrInfo.Password)) return "нет пароля";
-            if (string.IsNullOrEmpty(registrInfo.RePassword)) return "нет второго пароля";
-            if (!string.Equals(registrInfo.Password, registrInfo.RePassword)) return "не совпадают пароли";
+            if (string.IsNullOrEmpty(registrInfo.Password)) throw new IncorrectRequestException("нет пароля");
+            if (string.IsNullOrEmpty(registrInfo.RePassword)) throw new IncorrectRequestException("нет второго пароля");
+            if (!string.Equals(registrInfo.Password, registrInfo.RePassword)) throw new IncorrectRequestException("не совпадают пароли");
                 
             return "все ОК";
         }
