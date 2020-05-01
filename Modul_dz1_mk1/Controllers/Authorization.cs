@@ -1,4 +1,8 @@
+using System;
+using Helper;
+using Logic.Handler;
 using Microsoft.AspNetCore.Mvc;
+using Service.Items;
 
 namespace Modul_dz1_mk1.Controllers
 {
@@ -7,15 +11,10 @@ namespace Modul_dz1_mk1.Controllers
     public class Authorization : Controller
     {
         [HttpPost]
-        public string Set(AuthorizatInfo authorizatInfo)
+        public Guid AuthorisateUser(AuthorizatInfo authorizatInfo)
         {
-            return "";
+            var authorisateRequestHandler = new AuthorisateRequestHandler();
+            return authorisateRequestHandler.Handle(authorizatInfo);
         }
-    }
-
-    public class AuthorizatInfo
-    {
-        public string Email { get; set; }
-        public string Password { get; set; }
     }
 }
