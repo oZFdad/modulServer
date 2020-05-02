@@ -11,10 +11,8 @@ create table tokens
 (
 	KeyToken uuid,
 	LifeTime timestamp,
-	UserID integer
+	UserID integer references User_ref (id)
 );
-
-alter table public.tokens add constraint tokens_user_ref_fk foreign key (UserID) references public.user_ref(Id);
 
 create table account_ref
 (
@@ -24,6 +22,8 @@ create table account_ref
 	MoneyBalans numeric,
 	constraint account_number_uk unique (AccountNumber)
 );
+
+CREATE SEQUENCE accountNumber START 4000000000;
 
 
 
