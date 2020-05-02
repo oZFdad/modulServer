@@ -33,16 +33,11 @@ namespace Logic.Handler
             }
         }
 
-        public Guid Handle(RegistrInfo registrInfo)
+        public void Handle(RegistrInfo registrInfo)
         {
-            // Validate
             RegValidate(registrInfo);
-            
-            // Handle
             var userService = new UserService();
-            
-            int id;
-            var user = userService.GetSaltAndHashPassFromTableUser(registrInfo.Email);
+            var user = userService.GetUserFromTableUser(registrInfo.Email);
             if (user != null)
             {
                 throw new IncorrectRequestException("Пользователь уже существует");
@@ -53,14 +48,8 @@ namespace Logic.Handler
                 user.Email = registrInfo.Email;
                 user.Salt = Password.GetSalt();
                 user.HashPass = Password.GetHashPass(user.Salt, registrInfo.Password);
-                id = userService.InsertNewUser(user);
+                userService.InsertNewUser(user);
             }
-            // Return result
-            var token = new Token();
-            var tokenService = new TokenService();
-            tokenService.InsertToken(token, id);
-            
-            return token.KeyToken;
         }
     }
 }

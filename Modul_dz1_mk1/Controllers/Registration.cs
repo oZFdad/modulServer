@@ -10,10 +10,10 @@ namespace Modul_dz1_mk1.Controllers
     public class Registration : Controller
     {
         [HttpPost]
-        public Guid RegisterUser(RegistrInfo registrInfo)
+        public void RegisterUser(RegistrInfo registrInfo)
         {
             var regInfoRequestHandler = new RegInfoRequestHandler();
-            return regInfoRequestHandler.Handle(registrInfo);
+            regInfoRequestHandler.Handle(registrInfo);
         }
     }
     

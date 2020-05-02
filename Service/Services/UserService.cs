@@ -9,13 +9,13 @@ namespace Helper
 {
     public interface IUserService
     {
-        public User GetSaltAndHashPassFromTableUser(string email);
+        public User GetUserFromTableUser(string email);
         public int InsertNewUser(User user);
     }
     public class UserService : IUserService
     {
         private string _connent = ServerParameters.ServerAdres;
-        public User GetSaltAndHashPassFromTableUser(string email)
+        public User GetUserFromTableUser(string email)
         {
             var sql = @"SELECT ID, Email, Salt, HashPass
                          FROM public.User_ref
