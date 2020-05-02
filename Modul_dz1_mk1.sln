@@ -1,12 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modul_dz1_mk1", "Modul_dz1_mk1\Modul_dz1_mk1.csproj", "{E297B208-DFA5-4BB8-8057-0CF55606FDBD}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modul_dz1_mk1", "Modul_dz1_mk1\Modul_dz1_mk1.csproj", "{E297B208-DFA5-4BB8-8057-0CF55606FDBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helper", "Helper\Helper.csproj", "{F7B44DED-FB30-4A6B-856B-8430C2345B88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic", "Logic\Logic.csproj", "{EEBAA3BD-C9DD-40BE-8295-DDCC644B52B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{EEBAA3BD-C9DD-40BE-8295-DDCC644B52B1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{4B8C5071-F240-4CA9-9EF7-2C9C6A3868F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{4B8C5071-F240-4CA9-9EF7-2C9C6A3868F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,10 +19,6 @@ Global
 		{E297B208-DFA5-4BB8-8057-0CF55606FDBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E297B208-DFA5-4BB8-8057-0CF55606FDBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E297B208-DFA5-4BB8-8057-0CF55606FDBD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F7B44DED-FB30-4A6B-856B-8430C2345B88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F7B44DED-FB30-4A6B-856B-8430C2345B88}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F7B44DED-FB30-4A6B-856B-8430C2345B88}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F7B44DED-FB30-4A6B-856B-8430C2345B88}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EEBAA3BD-C9DD-40BE-8295-DDCC644B52B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EEBAA3BD-C9DD-40BE-8295-DDCC644B52B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEBAA3BD-C9DD-40BE-8295-DDCC644B52B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -30,5 +27,11 @@ Global
 		{4B8C5071-F240-4CA9-9EF7-2C9C6A3868F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B8C5071-F240-4CA9-9EF7-2C9C6A3868F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B8C5071-F240-4CA9-9EF7-2C9C6A3868F9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F89C5705-B5A3-4098-AE02-FBE74937FDC7}
 	EndGlobalSection
 EndGlobal

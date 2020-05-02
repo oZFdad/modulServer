@@ -1,3 +1,8 @@
+using Dapper;
+using Npgsql;
+using Service;
+using System;
+
 namespace Helper
 {
     public interface IAccountService
@@ -9,11 +14,19 @@ namespace Helper
     
     public class AccountService : IAccountService
     {
-        private string _connent = "Server=192.168.1.4;Port=5432;User Id=postgres;Password=1;Database=modulbankdb;";
-        
+        private string _connent = ServerParameters.ServerAdres;
+
         public void CreateAccount(int id)
         {
-            
+            var sqlGetAccountNumberRequest = @"SELECT nextval('accountNumber');";
+            var sqlInsertNewAccount = @"INSERT INTO public.account_ref
+                                        (AccountNumber, UserId, MoneyBalans)
+                                        VALUES(@AccountNumber, @UserId, @MoneyBalans);";
+            using (var connect = new NpgsqlConnection(_connent))
+            {
+                var accountNumber = Convert.ToString(connect.QueryFirst(sqlGetAccountNumberRequest));
+                connect.Execute(sqlInsertNewAccount,{ });
+            }
         }
 
         public void DeleteAccount(string accountNumber)

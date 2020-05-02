@@ -5,6 +5,6 @@ namespace Service.Items
         public int AccountId { get; set; }
         public string AccountNumber { get; set; } // уточнить
         public int UserId { get; set; }
-        public decimal Money { get; set; } // уточнить
+        public decimal MoneyBalans { get; set; } // уточнить
     }
 }

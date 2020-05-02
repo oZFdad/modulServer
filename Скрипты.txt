@@ -1,0 +1,50 @@
+create table User_ref
+(
+	id SERIAL Primary key,
+	Email text,
+	Salt text,
+	HashPass text,
+	constraint Email_uk unique (Email)
+);
+
+create table tokens
+(
+	KeyToken uuid,
+	LifeTime timestamp,
+	UserID integer
+);
+
+alter table public.tokens add constraint tokens_user_ref_fk foreign key (UserID) references public.user_ref(Id);
+
+create table account_ref
+(
+	AccountId SERIAL Primary key,
+	AccountNumber text,
+	UserId integer references User_ref (id),
+	MoneyBalans numeric,
+	constraint account_number_uk unique (AccountNumber)
+);
+
+
+
+
+
+
+
+
+
+
+полезняшки
+select id, Email, Salt, HashPass
+from public.user_ref;
+
+select keytoken, lifetime, userid
+from public.tokens;
+
+select AccountId, AccountNumber, UserId, MoneyBalans
+from account_ref;
+
+
+INSERT INTO public.account_ref
+(AccountNumber, UserId, MoneyBalans)
+VALUES('4000000001', 2, 100.25);

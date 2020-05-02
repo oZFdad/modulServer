@@ -1,6 +1,7 @@
 using System;
 using Dapper;
 using Npgsql;
+using Service;
 using Service.Items;
 
 namespace Helper
@@ -13,7 +14,7 @@ namespace Helper
     }
     public class UserService : IUserService
     {
-        private string _connent = "Server=192.168.1.4;Port=5432;User Id=postgres;Password=1;Database=modulbankdb;";
+        private string _connent = ServerParameters.ServerAdres;
         public User GetSaltAndHashPassFromTableUser(string email)
         {
             email = email.ToLower();
