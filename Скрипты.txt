@@ -48,3 +48,15 @@ from account_ref;
 INSERT INTO public.account_ref
 (AccountNumber, UserId, MoneyBalans)
 VALUES('4000000001', 2, 100.25);
+
+update public.account_ref set moneybalans = 100
+where accountnumber = '4000000000'
+
+BEGIN;
+update public.account_ref set moneybalans = moneybalans - 100
+where accountnumber = '4000000000';
+update public.account_ref set moneybalans = moneybalans + 100
+where accountnumber = '4000000002';
+COMMIT;
+
+rollback;

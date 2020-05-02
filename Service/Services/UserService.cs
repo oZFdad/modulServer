@@ -17,7 +17,6 @@ namespace Helper
         private string _connent = ServerParameters.ServerAdres;
         public User GetSaltAndHashPassFromTableUser(string email)
         {
-            email = email.ToLower();
             var sql = @"SELECT ID, Email, Salt, HashPass
                          FROM public.User_ref
                          where Email = @email;";
@@ -37,7 +36,7 @@ namespace Helper
             return result;
         }
 
-        public int InsertNewUser(User user) // не сделано
+        public int InsertNewUser(User user)
         {
             var sql = @"INSERT INTO public.User_ref
                         (Email, Salt, HashPass)

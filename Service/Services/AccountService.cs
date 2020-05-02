@@ -1,7 +1,6 @@
 using Dapper;
 using Npgsql;
 using Service;
-using System;
 
 namespace Helper
 {
@@ -10,6 +9,7 @@ namespace Helper
         public void CreateAccount(int id);
         public void DeleteAccount(string accountNumber);
         public void TransferMoney(string sender, string recipient, decimal sum);
+        public void ReplenishBalanceMoney(string accountNumber, decimal sum);
     }
     
     public class AccountService : IAccountService
@@ -18,14 +18,15 @@ namespace Helper
 
         public void CreateAccount(int id)
         {
-            var sqlGetAccountNumberRequest = @"SELECT nextval('accountNumber');";
+            decimal balans = 0;
+            var sqlGetAccountNumberRequest = "SELECT nextval('accountNumber');";
             var sqlInsertNewAccount = @"INSERT INTO public.account_ref
                                         (AccountNumber, UserId, MoneyBalans)
                                         VALUES(@AccountNumber, @UserId, @MoneyBalans);";
             using (var connect = new NpgsqlConnection(_connent))
             {
-                var accountNumber = Convert.ToString(connect.QueryFirst(sqlGetAccountNumberRequest));
-                connect.Execute(sqlInsertNewAccount,{ });
+                var accountNumber = connect.QuerySingle<long>(sqlGetAccountNumberRequest).ToString();
+                connect.Execute(sqlInsertNewAccount, new {accountNumber, userId = id, moneyBalans = balans});
             }
         }
 
@@ -36,7 +37,31 @@ namespace Helper
 
         public void TransferMoney(string sender, string recipient, decimal sum)
         {
-            throw new System.NotImplementedException();
+            var sqlTransferMoneySender = @"update public.account_ref set moneybalans = moneybalans - @moneybalans
+                                    where accountnumber = @accountnumber;";
+            var sqlsqlTransferMoneyRecipient = @"update public.account_ref set moneybalans = moneybalans + @moneybalans
+                        where accountnumber = @accountnumber;";
+            using (var connect = new NpgsqlConnection(_connent))
+            {
+                connect.Open();
+                using (var transaction = connect.BeginTransaction())
+                {
+                    connect.Execute(sqlTransferMoneySender, new {accountnumber = sender, moneybalans = sum});
+                    //throw new Exception("test");
+                    connect.Execute(sqlsqlTransferMoneyRecipient, new {accountnumber = recipient, moneybalans = sum});
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public void ReplenishBalanceMoney(string accountNumber, decimal sum)
+        {
+            var sqlReplenishBalanceMoney = @"update public.account_ref set moneybalans = moneybalans + @moneybalans
+                                            where accountnumber = @accountnumber;";
+            using (var connect = new NpgsqlConnection(_connent))
+            {
+                connect.Execute(sqlReplenishBalanceMoney, new {accountnumber = accountNumber, moneybalans = sum});
+            }
         }
     }
 }
