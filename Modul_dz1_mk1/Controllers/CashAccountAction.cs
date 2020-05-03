@@ -1,18 +1,20 @@
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace Modul_dz1_mk1.Controllers
 {
     [ApiController]
     [Route("Cash")]
-    
-    public class CashAccountAction
+    public class CashAccountAction : Controller
     {
-        [Authorize]
         [HttpGet]
-        public string Get()
+        [Authorize]
+        public IActionResult GetOK()
         {
-            return "ok";
+            var id = HttpContext.User.Claims.First(c => c.Type == "id").Value;
+            return Json(id);
         }
     }
 }

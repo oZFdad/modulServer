@@ -23,7 +23,6 @@ namespace Modul_dz1_mk1.Controllers
             var jwt = new JwtSecurityToken(
                 issuer: AuthOptions.ISSUER,
                 audience: AuthOptions.AUDIENCE,
-                notBefore: now,
                 claims: new []
                 {
                     new Claim("id", id.ToString()),

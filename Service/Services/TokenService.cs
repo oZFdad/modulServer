@@ -6,7 +6,7 @@ using Service.Items;
 
 namespace Helper
 {
-    public interface ITokenService
+    public interface ITokenService // заморожено до лучших времен
     {
         public User GetUserIfTokenAlive(Token token);
         public void InsertToken(Token token, int id);
