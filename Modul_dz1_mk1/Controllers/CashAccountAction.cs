@@ -8,8 +8,8 @@ namespace Modul_dz1_mk1.Controllers
     
     public class CashAccountAction
     {
-        [HttpGet]
         [Authorize]
+        [HttpGet]
         public string Get()
         {
             return "ok";

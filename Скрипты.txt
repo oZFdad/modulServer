@@ -7,23 +7,19 @@ create table User_ref
 	constraint Email_uk unique (Email)
 );
 
-create table tokens
-(
-	KeyToken uuid,
-	LifeTime timestamp,
-	UserID integer references User_ref (id)
-);
 
 create table account_ref
 (
 	AccountId SERIAL Primary key,
 	AccountNumber text,
-	UserId integer references User_ref (id),
+	UserId integer,
 	MoneyBalans numeric,
 	constraint account_number_uk unique (AccountNumber)
 );
 
 CREATE SEQUENCE accountNumber START 4000000000;
+
+alter table public.account_ref add constraint account_ref_user_ref_fk foreign key (UserId) references public.User_ref(Id);
 
 
 
