@@ -2,11 +2,18 @@ using System;
 using Helper;
 using Logic.Exceptions;
 using Service.Items;
+using Service.Services;
 
 namespace Logic.Handler
 {
     public class RegInfoRequestHandler
     {
+        private IUserService _userService;
+
+        public RegInfoRequestHandler(UserService userService)
+        {
+            _userService = userService;
+        }
         private bool RegValidate(RegistrInfo registrInfo)
         {
             if (!IsEmailValid(registrInfo.Email)) throw new IncorrectRequestException("плохой адрес");
@@ -36,8 +43,7 @@ namespace Logic.Handler
         public void Handle(RegistrInfo registrInfo)
         {
             RegValidate(registrInfo);
-            var userService = new UserService();
-            var user = userService.GetUserFromTableUser(registrInfo.Email);
+            var user = _userService.GetUserFromTableUser(registrInfo.Email);
             if (user != null)
             {
                 throw new IncorrectRequestException("Пользователь уже существует");
@@ -48,7 +54,7 @@ namespace Logic.Handler
                 user.Email = registrInfo.Email;
                 user.Salt = Password.GetSalt();
                 user.HashPass = Password.GetHashPass(user.Salt, registrInfo.Password);
-                userService.InsertNewUser(user);
+                _userService.InsertNewUser(user);
             }
         }
     }

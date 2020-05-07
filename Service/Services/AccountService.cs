@@ -1,8 +1,7 @@
 using Dapper;
 using Npgsql;
-using Service;
 
-namespace Helper
+namespace Service.Services
 {
     public interface IAccountService
     {
@@ -10,6 +9,7 @@ namespace Helper
         public void DeleteAccount(string accountNumber);
         public void TransferMoney(string sender, string recipient, decimal sum);
         public void ReplenishBalanceMoney(string accountNumber, decimal sum);
+        public int GetUserIdWhereSetAccountNumber(string accountNumber);
     }
     
     public class AccountService : IAccountService
@@ -62,6 +62,20 @@ namespace Helper
             {
                 connect.Execute(sqlReplenishBalanceMoney, new {accountnumber = accountNumber, moneybalans = sum});
             }
+        }
+
+        public int GetUserIdWhereSetAccountNumber(string accountNumber)
+        {
+            int id;
+            var sqlValidate = @"SELECT userid
+                         FROM public.account_ref
+                         where accountnumber = @accountNumber;";
+            using (var connect = new NpgsqlConnection(_connent))
+            {
+                id = connect.QuerySingle<int>(sqlValidate);
+            }
+
+            return id;
         }
     }
 }

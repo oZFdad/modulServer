@@ -1,10 +1,11 @@
 using System;
 using Dapper;
+using Helper;
 using Npgsql;
 using Service;
 using Service.Items;
 
-namespace Helper
+namespace Service.Services
 {
     public interface ITokenService // заморожено до лучших времен
     {

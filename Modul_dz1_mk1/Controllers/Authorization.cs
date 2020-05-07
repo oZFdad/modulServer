@@ -1,6 +1,7 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using Service.Services;
 using Logic.Handler;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -15,7 +16,7 @@ namespace Modul_dz1_mk1.Controllers
         [HttpPost]
         public IActionResult AuthorisateUser(AuthorizatInfo authorizatInfo)
         {
-            var authorisateRequestHandler = new AuthorisateRequestHandler();
+            var authorisateRequestHandler = new AuthorisateRequestHandler(new UserService());
             var id = authorisateRequestHandler.Handle(authorizatInfo);
             
             var now = DateTime.UtcNow;

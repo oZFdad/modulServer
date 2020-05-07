@@ -1,10 +1,9 @@
 using System;
 using Dapper;
 using Npgsql;
-using Service;
 using Service.Items;
 
-namespace Helper
+namespace Service.Services
 
 {
     public interface IUserService
