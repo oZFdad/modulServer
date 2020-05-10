@@ -20,39 +20,3 @@ create table account_ref
 CREATE SEQUENCE accountNumber START 4000000000;
 
 alter table public.account_ref add constraint account_ref_user_ref_fk foreign key (UserId) references public.User_ref(Id);
-
-
-
-
-
-
-
-
-
-
-полезняшки
-select id, Email, Salt, HashPass
-from public.user_ref;
-
-select keytoken, lifetime, userid
-from public.tokens;
-
-select AccountId, AccountNumber, UserId, MoneyBalans
-from account_ref;
-
-
-INSERT INTO public.account_ref
-(AccountNumber, UserId, MoneyBalans)
-VALUES('4000000001', 2, 100.25);
-
-update public.account_ref set moneybalans = 100
-where accountnumber = '4000000000'
-
-BEGIN;
-update public.account_ref set moneybalans = moneybalans - 100
-where accountnumber = '4000000000';
-update public.account_ref set moneybalans = moneybalans + 100
-where accountnumber = '4000000002';
-COMMIT;
-
-rollback;

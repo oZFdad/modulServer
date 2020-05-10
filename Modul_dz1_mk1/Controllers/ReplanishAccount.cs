@@ -8,7 +8,7 @@ namespace Modul_dz1_mk1.Controllers
 {
     [ApiController]
     [Route("ReplanishAcc")]
-    public class ReplanishAccount
+    public class ReplanishAccount : Controller
     {
         [Authorize]
         [HttpPost]
@@ -16,7 +16,7 @@ namespace Modul_dz1_mk1.Controllers
         {
             var replanishAccauntHandler = new ReplanishBalansHandler(new AccountService());
             replanishAccauntHandler.Handle(deposit);
-            return null;
+            return Ok();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Modul_dz1_mk1.Controllers
             var id = HttpContext.User.Claims.First(c => c.Type == "id").Value;
             var createAccountHandler = new CreateNewAccountHandler(new AccountService());
             createAccountHandler.Handle(Convert.ToInt32(id));
-            return null;
+            return Ok();
         }
     }
 }

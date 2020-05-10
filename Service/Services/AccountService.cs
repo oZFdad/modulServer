@@ -26,7 +26,7 @@ namespace Service.Services
             using (var connect = new NpgsqlConnection(_connent))
             {
                 var accountNumber = connect.QuerySingle<long>(sqlGetAccountNumberRequest).ToString();
-                connect.Execute(sqlInsertNewAccount, new {accountNumber, userId = id, moneyBalans = balans});
+                connect.Execute(sqlInsertNewAccount, new { AccountNumber = accountNumber, userId = id, moneyBalans = balans});
             }
         }
 
@@ -66,13 +66,13 @@ namespace Service.Services
 
         public int GetUserIdWhereSetAccountNumber(string accountNumber)
         {
-            int id;
+            int id = -1;
             var sqlValidate = @"SELECT userid
                          FROM public.account_ref
                          where accountnumber = @accountNumber;";
             using (var connect = new NpgsqlConnection(_connent))
             {
-                id = connect.QuerySingle<int>(sqlValidate);
+                id = connect.QueryFirst<int>(sqlValidate,new { accountNumber = accountNumber});
             }
 
             return id;

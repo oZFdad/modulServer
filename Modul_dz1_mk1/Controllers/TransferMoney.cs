@@ -19,7 +19,7 @@ namespace Modul_dz1_mk1.Controllers
             var transferHandler = new TransferHandler(new AccountService());
             var id = Convert.ToInt32(HttpContext.User.Claims.First(c => c.Type == "id").Value);
             transferHandler.Handle(transferMoney, id);
-            return null;
+            return Ok();
         }
     }
 }
